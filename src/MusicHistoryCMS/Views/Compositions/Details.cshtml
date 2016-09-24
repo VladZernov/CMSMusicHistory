@@ -1,0 +1,87 @@
+@model MusicHistoryCMS.Models.Composition
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class="mh-page-header">@Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    <h4 class="mh-page-headerC">@Html.DisplayFor(model => model.Composer.Name)</h4>
+    <hr />
+
+    <div class="composition-youtube">
+        @{
+            string url = "http://www.youtube.com/embed/" + Model.YoutubeKey;
+        }
+        <iframe class="composition-iframe" width="420" height="315" src=@url></iframe>
+        <br />
+    </div>
+    <div class="composition-details">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Value)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Value)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Keyword)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Keyword.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Genre.Name)
+            </dd>
+            <dt>
+                Number of Articles
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject.Articles.Count)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+    </div>
+    <div class="composition-articles">
+        <h4>Articles</h4>
+        <dl class="dl-horizontal">
+            @foreach (var article in Model.Subject.Articles)
+            {
+            <dt>
+                @("Issue #" + article.IssueID.ToString() + " ")
+                @("(" + article.Author.FirstName + " " + article.Author.LastName + ")")
+            </dt>
+            <dd>
+                @article.Text
+            </dd>
+            }
+        </dl>
+    </div>
+    <footer class="mh-page-footer">
+        <p>
+            <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </p>
+    </footer>
+</div>

@@ -1,0 +1,46 @@
+@model Sakura.AspNet.IPagedList<Keyword>
+
+@{
+    ViewData["Title"] = "Keywords";
+}
+
+<table class="flatTable">
+    <tr class="titleTr">
+        <td class="titleTd">KEYWORDS</td>
+        <td colspan="2"></td>
+        <td class="plusTd">
+            <form style="display: inline" action="/Keywords/Create" method="get">
+                <button class="plusBt button"></button>
+            </form>
+        </td>
+    </tr>
+    <tr class="headingTr">
+        <td>
+            NAME
+        </td>
+        <td>
+            DESCRIPTION
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                @Html.ActionLink("To Compositions", "Index", "Compositions", new { keywordId = item.ID })
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+<nav asp-pager-source="Model"></nav>

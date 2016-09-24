@@ -1,0 +1,42 @@
+@model Sakura.AspNet.IPagedList<Genre>
+
+@{
+    ViewData["Title"] = "Genres";
+}
+
+<table class="flatTable">
+    <tr class="titleTr">
+        <td class="titleTd">GENRES</td>
+        <td colspan="1"></td>
+        <td class="plusTd">
+            <form style="display: inline" action="/Genres/Create" method="get">
+                <button class="plusBt button"></button>
+            </form>
+        </td>
+    </tr>
+    <tr class="headingTr">
+        <td>
+            NAME
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                @Html.ActionLink("To Compositions", "Index", "Compositions", new { genreId = item.ID }) |
+                @Html.ActionLink("To Articles", "Index", "Articles", new { subjectId = item.ID }) |
+                @Html.ActionLink("To Composers", "Index", "Composers", new { genreId = item.ID })
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+<nav asp-pager-source="Model"></nav>

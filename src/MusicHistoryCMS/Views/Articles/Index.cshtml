@@ -1,0 +1,71 @@
+@model Sakura.AspNet.IPagedList<Article>
+
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<table class="flatTable">
+    <tr class="titleTr">
+        <td class="titleTd">ARTICLES</td>
+        <td colspan="5"></td>
+        <td class="plusTd">
+            <form style="display: inline" action="/Articles/Create" method="get">
+                <button class="plusBt button"></button>
+            </form>
+        </td>
+    </tr>
+    <tr class="headingTr">
+        <td>
+            AUTHOR
+        </td>
+        <td>
+            ISSUE
+        </td>
+        <td>
+            DATE
+        </td>
+        <td>
+            SUBJECT
+        </td>
+        <td>
+            TEXT
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Author.FirstName + " " + item.Author.LastName, "Index", "Articles", new { user = item.Author.UserName })
+            </td>
+            <td>
+                #@Html.DisplayFor(modelItem => item.Issue.Number)
+            </td>
+            <td>
+                @item.Date.ToShortDateString()
+            </td>
+            <td>
+                @if (item.Subject != null)
+                {
+                    @Html.ActionLink(item.Subject.Type + " - " + (item.Subject.Composer != null ? item.Subject.Composer.Name : (item.Subject.Composition != null ? item.Subject.Composition.Name : (item.Subject.Genre != null ? item.Subject.Genre.Name : (item.Subject.Instrument != null ? item.Subject.Instrument.Name : item.Subject.Period.Name)))), "Details", item.Subject.Type + "s", new { id = item.SubjectID })
+                }
+                else
+                {
+                    <b>Other</b>
+                }
+            </td>
+            <td>
+                @Html.ActionLink( String.Join(" ", item.Text.Split().Take(5)) + "...", "Text", "Articles", new { id = item.ID })
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> 
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+<nav asp-pager-source="Model"></nav>
+

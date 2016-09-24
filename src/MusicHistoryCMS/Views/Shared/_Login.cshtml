@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+        <environment names="Development,Staging,Production">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.css" />   
+            <link rel="stylesheet" href="~/css/site.css" />
+            <!-- Bootstrap Core CSS -->
+            <link href="~/lib/sb-admin/css/bootstrap.min.css" rel="stylesheet">
+            <!-- Custom CSS -->
+            <link href="~/lib/sb-admin/css/sb-admin.css" rel="stylesheet">
+            <!-- Morris Charts CSS -->
+            <link href="~/lib/sb-admin/css/plugins/morris.css" rel="stylesheet">
+            <!-- Custom Fonts -->
+            <link href="~/lib/sb-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        </environment>
+    </head>
+<body>
+
+    <div id="wrapper" class="login-page">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; Magazine "History of Music" - Content Management System</p>
+            </footer>
+        <!-- /#page-wrapper -->
+    </div>
+
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <!-- jQuery -->
+        <script src="~/lib/sb-admin/js/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="~/lib/sb-admin/js/bootstrap.min.js"></script>
+        <!-- Morris Charts JavaScript -->
+        <script src="~/lib/sb-admin/js/plugins/morris/raphael.min.js"></script>
+        <script src="~/lib/sb-admin/js/plugins/morris/morris.min.js"></script>
+        <script src="~/lib/sb-admin/js/plugins/morris/morris-data.js"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

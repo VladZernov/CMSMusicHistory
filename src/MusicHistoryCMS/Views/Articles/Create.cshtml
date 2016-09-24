@@ -1,0 +1,49 @@
+@model MusicHistoryCMS.ViewModels.Article.ArticleViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="SubjectType" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="SubjectType" class="form-control" asp-items="(SelectList)@ViewData["Types"]"></select>
+            </div>
+        </div>
+        <div id="content"></div>
+
+        <div class="form-group">
+            <label asp-for="SubjectName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SubjectName" class="form-control" />
+                <span asp-validation-for="SubjectName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Text" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Text" class="form-control"></textarea>
+                <span asp-validation-for="Text" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" class="mh-page-footer">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

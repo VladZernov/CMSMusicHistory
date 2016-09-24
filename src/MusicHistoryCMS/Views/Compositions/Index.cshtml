@@ -1,0 +1,71 @@
+@model Sakura.AspNet.IPagedList<Composition>
+
+@{
+    ViewData["Title"] = "Compositions";
+}
+
+    <table class="flatTable">
+        <tr class="titleTr">
+            <td class="titleTd">COMPOSITIONS</td>
+            <td colspan="6"></td>
+            <td class="plusTd">
+                <form style="display: inline" action="/Compositions/Create" method="get">
+                    <button class="plusBt button"></button>
+                </form>
+            </td>
+        </tr>
+        <tr class="headingTr">
+            <td>
+                NAME
+            </td>
+            <td>
+                COMPOSER
+            </td>
+            <td>
+                VALUE
+            </td>
+            <td>
+                YEAR
+            </td>
+            <td>
+                GENRE
+            </td>
+            <td>
+                KEYWORD
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Composer.Name, "Index", "Compositions", new { composerId = item.ComposerID })
+                </td>
+                <td>
+                    @Html.ActionLink(item.Value.ToString(), "Index", "Compositions", new { value = item.Value })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Genre.Name, "Index", "Compositions", new { genreId = item.GenreID })
+                </td>
+                <td>
+                    @Html.ActionLink(item.Keyword.Name, "Index", "Compositions", new { keywordId = item.KeywordID })
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                    @Html.ActionLink("To Articles", "Index", "Articles", new { subjectId = item.ID })
+                </td>
+                <td></td>
+            </tr>
+        }
+    </table>
+    <nav asp-pager-source="Model"></nav>

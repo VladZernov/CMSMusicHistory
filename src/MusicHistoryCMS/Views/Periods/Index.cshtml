@@ -1,0 +1,42 @@
+@model Sakura.AspNet.IPagedList<Period>
+
+@{
+    ViewData["Title"] = "Period";
+}
+
+<table class="flatTable">
+    <tr class="titleTr">
+        <td class="titleTd">PERIOD</td>
+        <td colspan="1"></td>
+        <td class="plusTd">
+            <form style="display: inline" action="/Periods/Create" method="get">
+                <button class="plusBt button"></button>
+            </form>
+        </td>
+    </tr>
+    <tr class="headingTr">
+        <td>
+            NAME
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                @Html.ActionLink("To Composers", "Index", "Composers", new { periodId = item.ID }) |
+                @Html.ActionLink("To Instruments", "Index", "Instruments", new { periodId = item.ID }) |
+                @Html.ActionLink("To Articles", "Index", "Articles", new { subjectId = item.ID })
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+<nav asp-pager-source="Model"></nav>

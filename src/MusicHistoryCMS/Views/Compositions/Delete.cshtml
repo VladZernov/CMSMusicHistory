@@ -1,0 +1,14 @@
+@model MusicHistoryCMS.Models.Composition
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2 class="alert-warning mh-delete-header">Are you sure you want to delete @Html.DisplayFor(model => model.Name)?</h2>
+    
+<form asp-action="Delete">
+    <div class="form-actions no-color mh-delete-buttons">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</form>

@@ -1,0 +1,60 @@
+@model Sakura.AspNet.IPagedList<Composer>
+
+@{
+    ViewData["Title"] = "Composers";
+}
+
+<table class="flatTable">
+    <tr class="titleTr">
+        <td class="titleTd">COMPOSERS</td>
+        <td colspan="4"></td>
+        <td class="plusTd">
+            <form style="display: inline" action="/Composers/Create" method="get">
+                <button class="plusBt button"></button>
+            </form>
+        </td>
+    </tr>
+    <tr class="headingTr">
+        <td>
+            NAME
+        </td>
+        <td>
+            BORN
+        </td>
+        <td>
+            DIE
+        </td>
+        <td>
+            PERIOD
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BornYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DieYear)
+            </td>
+            <td>
+                @Html.ActionLink(item.Period.Name, "Index", "Composers", new { periodId = item.PeriodID })
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                @Html.ActionLink("To Compositions", "Index", "Compositions", new { composerId = item.ID }) |
+                @Html.ActionLink("To Genres", "Index", "Genres", new { composerId = item.ID }) |
+                @Html.ActionLink("To Articles", "Index", "Articles", new { subjectId = item.ID })
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+<nav asp-pager-source="Model"></nav>

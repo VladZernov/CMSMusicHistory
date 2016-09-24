@@ -1,0 +1,19 @@
+@model MusicHistoryCMS.Models.Article
+
+@{
+    ViewData["Title"] = "Text";
+}
+
+<div>
+    <article class="mh-article-text">
+        @Model.Text
+    </article>
+</div>
+<footer class="mh-page-footer">
+    <p>
+        <a asp-action="Index">Back to List</a>
+    </p>
+</footer>
+
+
+

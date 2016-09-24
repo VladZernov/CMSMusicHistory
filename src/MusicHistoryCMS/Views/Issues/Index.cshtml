@@ -1,0 +1,47 @@
+@model Sakura.AspNet.IPagedList<Issue>
+
+@{
+    ViewData["Title"] = "Issues";
+}
+
+<table class="flatTable">
+    <tr class="titleTr">
+        <td class="titleTd">ISSUES</td>
+        <td colspan="5"></td>
+    </tr>
+    <tr class="headingTr">
+        <td>
+            APPROVED
+        </td>
+        <td>
+            NUMBER
+        </td>
+        <td>
+            DATE
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Approved)
+            </td>
+            <td>
+                #@Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @item.Date.ToShortDateString()
+            </td>
+            <td>
+               @Html.ActionLink("To Articles", "Index", "Articles", new { issueId = item.ID })
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>
+<nav asp-pager-source="Model"></nav>
+
+
